@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter, Route } from 'react-router-dom';
 import * as api from './services/api';
+import Home from './pages/Home';
 
 export default class App extends React.Component {
   async componentDidMount() {
@@ -10,9 +12,9 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>Teste</p>
-      </div>
+      <BrowserRouter>
+        <Route exact path="/" component={ Home } />
+      </BrowserRouter>
     );
   }
 }
