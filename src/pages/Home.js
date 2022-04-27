@@ -15,7 +15,7 @@ export default class Home extends React.Component {
   }
 
   // No DidMount chama faz a requisição das cartegorias na API
-  // Começa o Requisito 6
+  // Começa o Requisito 11
   async componentDidMount() {
     // console.log('entrou');
     const resposta = await getCategories();
@@ -46,18 +46,6 @@ export default class Home extends React.Component {
       products: products.results,
     });
   }
-
-  // Código do Samuel
-  // OnClickChange = async ({ target }) => {
-  //   // console.log('Entrou em ClickChange');
-  //   console.log(target.value);
-  //   const categoria = target.value;
-  //   const products = await getProductsFromCategoryAndQuery('', categoria);
-  //   console.log('products', products);
-  //   this.setState({
-  //     products: products.results,
-  //   });
-  // }
 
   render() {
     const { categoriasLista, products, queryResult } = this.state;
