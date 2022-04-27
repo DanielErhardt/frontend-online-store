@@ -1,5 +1,6 @@
 import React from 'react';
 import { getCategories } from '../services/api';
+import CartButton from '../components/CartButton';
 
 export default class Home extends React.Component {
   constructor() {
@@ -20,7 +21,7 @@ export default class Home extends React.Component {
   }
 
   OnClickChange = () => {
-    console.log('XablAu');
+    console.log('Xablau');
   }
 
   render() {
@@ -33,6 +34,7 @@ export default class Home extends React.Component {
             <input id="input-search" type="text" />
           </label>
         </form>
+        <CartButton />
         <div>
           {produtosLista.map((produto) => (
             <section key={ produto.id }>
