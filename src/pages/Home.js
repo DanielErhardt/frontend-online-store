@@ -20,7 +20,7 @@ export default class Home extends React.Component {
   }
 
   OnClickChange = () => {
-    console.log('Xablau');
+    console.log('XablAu');
   }
 
   render() {
