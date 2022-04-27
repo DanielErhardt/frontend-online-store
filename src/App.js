@@ -1,16 +1,11 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import * as api from './services/api';
+// import * as api from './services/api';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 
 export default class App extends React.Component {
-  async componentDidMount() {
-    api.getCategories();
-    // const result = await api.getProductsFromCategoryAndQuery('MLB5672', 'Acessórios para Veículos');
-  }
-
   render() {
     return (
       <BrowserRouter>

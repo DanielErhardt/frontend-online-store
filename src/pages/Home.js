@@ -7,48 +7,60 @@ export default class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      result: '',
+      queryResult: '',
       products: [],
-      produtosLista: [],
+      categoriasLista: [],
+      categoria: '',
     };
   }
 
   // No DidMount chama faz a requisição das cartegorias na API
   // Começa o Requisito 6
   async componentDidMount() {
-    console.log('entrou');
+    // console.log('entrou');
     const resposta = await getCategories();
-    console.log('resposta', resposta);
+    // console.log('resposta', resposta);
     this.setState({
-      produtosLista: resposta,
+      categoriasLista: resposta,
     });
   }
 
   // Código do Matheus
   getValueInput = ({ target }) => {
+    console.log('valor digitado', target.value);
     this.setState({
-      result: target.value,
+      [target.name]: target.value,
+    }, async () => {
+      await this.searchProducts();
     });
   }
 
   // Código do Matheus
-  searchProducts = async (event) => {
-    event.preventDefault();
-    const { result } = this.state;
-    const products = await getProductsFromCategoryAndQuery(`${result}`, `${result}`);
-    console.log(products);
+  searchProducts = async () => {
+    const { queryResult, categoria } = this.state;
+    const products = (
+      await getProductsFromCategoryAndQuery(`${categoria}`, `${queryResult}`)
+    );
+    console.log('products', products.results);
     this.setState({
       products: products.results,
     });
   }
 
   // Código do Samuel
-  OnClickChange = () => {
-    console.log('Xablau');
-  }
+  // OnClickChange = async ({ target }) => {
+  //   // console.log('Entrou em ClickChange');
+  //   console.log(target.value);
+  //   const categoria = target.value;
+  //   const products = await getProductsFromCategoryAndQuery('', categoria);
+  //   console.log('products', products);
+  //   this.setState({
+  //     products: products.results,
+  //   });
+  // }
 
   render() {
-    const { produtosLista, products } = this.state;
+    const { categoriasLista, products, queryResult } = this.state;
     return (
       <section>
         {/* Código do Matheus */}
@@ -59,6 +71,8 @@ export default class Home extends React.Component {
               data-testid="query-input"
               id="input-search"
               type="text"
+              name="queryResult"
+              value={ queryResult }
               onChange={ this.getValueInput }
             />
           </label>
@@ -84,20 +98,21 @@ export default class Home extends React.Component {
         <CartButton />
         {/* Código do Samuel */}
         <div>
-          {produtosLista.map((produto) => (
-            <section key={ produto.id }>
+          {categoriasLista.map((categoria) => (
+            <section key={ categoria.id }>
               <label
                 data-testid="category"
-                htmlFor="produtos"
+                htmlFor={ categoria.id }
               >
                 <div className="categorias">
                   <input
                     type="radio"
-                    id="produtos"
-                    name="produtos"
-                    onClick={ this.OnClickChange }
+                    id={ categoria.id }
+                    name="categoria"
+                    value={ categoria.id }
+                    onClick={ this.getValueInput }
                   />
-                  { produto.name }
+                  { categoria.name }
                 </div>
               </label>
             </section>
