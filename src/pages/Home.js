@@ -14,7 +14,7 @@ export default class Home extends React.Component {
   }
 
   // No DidMount chama faz a requisição das cartegorias na API
-  // Código do Samuel
+  // Começa o Requisito 6
   async componentDidMount() {
     console.log('entrou');
     const resposta = await getCategories();
