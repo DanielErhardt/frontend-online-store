@@ -25,9 +25,9 @@ export default class Cart extends React.Component {
   }
 
   // Pega quantas vezes o produto aparece em cartItems e retorna o número
-  getProductQuantity = (product) => {
+  getItemQuantity = (itemId) => {
     const { cartItems } = this.props;
-    const quantity = cartItems.filter((item) => item.id === product.id).length;
+    const quantity = cartItems.filter((item) => item.id === itemId).length;
     return quantity;
   }
 
@@ -46,7 +46,7 @@ export default class Cart extends React.Component {
           uniqueItems.map((item) => (
             <CartItem
               key={ item.id }
-              quantity={ this.getProductQuantity(item) }
+              quantity={ this.getItemQuantity(item) }
               { ...item }
             />
           ))
