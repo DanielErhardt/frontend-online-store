@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 export default class AddToCart extends React.Component {
   render() {
-    const { addToCart, id } = this.props;
+    const { addToCart, id, testId } = this.props;
 
     return (
       <div>
         <button
           type="button"
           onClick={ () => addToCart(id) }
-          data-testid="product-add-to-cart"
+          data-testid={ testId }
         >
           Adcionar ao carrinho
         </button>

@@ -15,7 +15,7 @@ export default class CardsProducts extends React.Component {
           {' '}
         </p>
         <img src={ thumbnail } alt="" />
-        <AddToCart addToCart={ addToCart } id={ id } />
+        <AddToCart addToCart={ addToCart } id={ id } testId="product-add-to-cart" />
         <Link
           data-testid="product-detail-link"
           to={ `/products/${product.id}` }
