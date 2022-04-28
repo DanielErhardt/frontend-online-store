@@ -53,10 +53,10 @@ export default class CardsProducts extends Component {
     const xablau = [1, 2, TRES, QUATRO, CINCO];
     const { email, evaluation, mensagem } = this.state;
     // console.log(xlablau);
-    const arrayX = [];
-    for (let index = 1; index === CINCO; index += 1) {
-      arrayX.push(index);
-    }
+    // const arrayX = [];
+    // for (let index = 1; index === CINCO; index += 1) {
+    //   arrayX.push(index);
+    // }
     return (
       <section>
         <h3>Avaliações</h3>
