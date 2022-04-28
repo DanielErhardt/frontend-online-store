@@ -38,7 +38,15 @@ export default class App extends React.Component {
             ) }
           />
           <Route path="/cart" component={ Cart } />
-          <Route path="/products/:id" component={ MoreDetails } />
+          <Route
+            path="/products/:id"
+            render={ (props) => (
+              <MoreDetails
+                { ...props }
+                addToCart={ this.addToCart }
+              />
+            ) }
+          />
         </Switch>
       </BrowserRouter>
     );

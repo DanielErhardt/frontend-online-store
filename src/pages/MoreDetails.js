@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductDetails } from '../services/api';
+import AddToCart from '../components/AddToCart';
 
 export default class MoreDetails extends React.Component {
   constructor() {
@@ -22,6 +23,7 @@ export default class MoreDetails extends React.Component {
   // marca, peso,
 
   render() {
+    const { match: { params: { id } }, addToCart } = this.props;
     const { produto } = this.state;
     return (
       <section data-testid="product-detail-name">
@@ -31,6 +33,11 @@ export default class MoreDetails extends React.Component {
             <p>{item.value_name}</p>
           </div>
         ))}
+        <AddToCart
+          addToCart={ addToCart }
+          id={ id }
+          testId="product-detail-add-to-cart"
+        />
       </section>
     );
   }
