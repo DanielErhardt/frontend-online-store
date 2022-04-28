@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CardsProducts from '../components/CardsProduct';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import CartButton from '../components/CartButton';
@@ -61,6 +62,7 @@ export default class Home extends React.Component {
 
   render() {
     const { categoriasLista, products, queryResult } = this.state;
+    const { addToCart } = this.props;
     return (
       <section>
         {/* Código do Matheus */}
@@ -91,6 +93,9 @@ export default class Home extends React.Component {
               title={ item.title }
               price={ item.price }
               thumbnail={ item.thumbnail }
+              id={ item.id }
+              addToCart={ addToCart }
+              product={ item }
             />
           ))}
         </div>
@@ -122,3 +127,7 @@ export default class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  addToCart: PropTypes.func,
+}.isRequired;
