@@ -65,6 +65,8 @@ export default class Home extends React.Component {
     const { addToCart } = this.props;
     return (
       <section>
+        {/* Código do Daniel */}
+        <CartButton />
         {/* Código do Matheus */}
         <form>
           <label data-testid="home-initial-message" htmlFor="input-search">
@@ -99,8 +101,6 @@ export default class Home extends React.Component {
             />
           ))}
         </div>
-        {/* Código do Daniel */}
-        <CartButton />
         {/* Código do Samuel */}
         <div>
           {categoriasLista.map((categoria) => (

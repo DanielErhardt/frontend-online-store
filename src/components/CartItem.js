@@ -10,15 +10,15 @@ export default class CartItem extends React.Component {
 
     const multipliedPrice = price * quantity;
     return (
-      <span>
-        <button onClick={ removeAll(id) } type="button">X</button>
+      <div>
+        <button onClick={ () => removeAll(id) } type="button">X</button>
         <img src={ thumbnail } alt="" />
-        <p>{ title }</p>
-        <button onClick={ changeQuantity(id, false) } type="button">-</button>
-        <p>{ quantity }</p>
-        <button onClick={ changeQuantity(id, true) } type="button">+</button>
+        <p data-testid="shopping-cart-product-name">{ title }</p>
+        <button onClick={ () => changeQuantity(id, false) } type="button">-</button>
+        <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
+        <button onClick={ () => changeQuantity(id, true) } type="button">+</button>
         <p>{ `R$ ${multipliedPrice}` }</p>
-      </span>
+      </div>
     );
   }
 }

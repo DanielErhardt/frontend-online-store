@@ -11,19 +11,26 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      itemsCart: [],
+      cartItems: [],
     };
   }
 
   addToCart = async (id) => { // chamar essa funçao nos botoes de adcionar ao carrinho
-    const { itemsCart } = this.state;
+    const { cartItems } = this.state;
     const product = await getProductDetails(id);
     this.setState({
-      itemsCart: [...itemsCart, product],
-    });
+      cartItems: [...cartItems, product],
+    }, () => console.log('add', this.state.cartItems));
+  }
+
+  updateCartItems = (newCartItems) => {
+    this.setState({
+      cartItems: newCartItems,
+    }, () => console.log('update', this.state.cartItems));
   }
 
   render() {
+    const { cartItems } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -37,7 +44,16 @@ export default class App extends React.Component {
               />
             ) }
           />
-          <Route path="/cart" component={ Cart } />
+          <Route
+            path="/cart"
+            render={ (props) => (
+              <Cart
+                { ...props }
+                cartItems={ cartItems }
+                updateCartItems={ this.updateCartItems }
+              />
+            ) }
+          />
           <Route
             path="/products/:id"
             render={ (props) => (
