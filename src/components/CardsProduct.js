@@ -3,25 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default class CardsProducts extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      listaProducts: [],
-    };
-  }
-
-  getList = () => {
-    const { products } = this.props;
-    this.setState({
-      listaProducts: products,
-    });
-  }
-
   render() {
     // Código do Matheus
-    const { title, thumbnail, price, products } = this.props;
-    //const { listaProducts } = this.state;
+    const { title, thumbnail, price, product } = this.props;
     return (
       <div data-testid="product">
         <h2>{ title }</h2>
@@ -30,7 +14,13 @@ export default class CardsProducts extends React.Component {
           {' '}
         </p>
         <img src={ thumbnail } alt="" />
-        <Link to={ `/products/${products.id}` }>Mais Detalhes</Link>
+        <Link
+          data-testid="product-detail-link"
+          to={ `/products/${product.id}` }
+        >
+          Mais Detalhes
+
+        </Link>
       </div>
     );
   }

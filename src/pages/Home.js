@@ -91,7 +91,7 @@ export default class Home extends React.Component {
               title={ item.title }
               price={ item.price }
               thumbnail={ item.thumbnail }
-              products={ item }
+              product={ item }
             />
           ))}
         </div>
