@@ -6,7 +6,6 @@ export default class CardsProducts extends Component {
   constructor() {
     super();
     this.state = {
-    //   evaluations: [],
       email: '',
       evaluation: '',
       mensagem: '',
@@ -15,9 +14,16 @@ export default class CardsProducts extends Component {
 
   onInputChange = ({ target }) => {
     console.log('Entrou em InputChange');
-    console.log('value', target.value);
+    console.log('target', target);
     this.setState({
       [target.name]: target.value,
+    });
+  }
+
+  onClickStar = (param) => {
+    console.log(param);
+    this.setState({
+      evaluation: param,
     });
   }
 
@@ -41,13 +47,16 @@ export default class CardsProducts extends Component {
 
   render() {
     // Código do Samuel
-    // const {  } = this.props;
     const TRES = 3;
     const QUATRO = 4;
     const CINCO = 5;
     const xablau = [1, 2, TRES, QUATRO, CINCO];
     const { email, evaluation, mensagem } = this.state;
     // console.log(xlablau);
+    const arrayX = [];
+    for (let index = 1; index === CINCO; index += 1) {
+      arrayX.push(index);
+    }
     return (
       <section>
         <h3>Avaliações</h3>
@@ -62,25 +71,20 @@ export default class CardsProducts extends Component {
             required
           />
           <div className="evaluationStar">
-            {xablau.map((elemento, index) => {
-              // console.log(index, elemento);
-              console.log(xablau.length);
-              index += 1;
-              return (
-                <button
-                  data-testid={ `${index}-rating` }
-                  type="button"
-                  name="evaluation"
-                  value={ elemento }
-                  key={ index }
-                  className={ index <= evaluation ? 'on' : 'off' }
-                  onClick={ this.onInputChange }
-                  required
-                >
-                  <span className="star">&#9733;</span>
-                </button>
-              );
-            })}
+            {xablau.map((elemento, index) => (
+              <button
+                data-testid={ `${index}-rating` }
+                type="button"
+                name="evaluation"
+                value={ elemento }
+                key={ index }
+                className={ index <= evaluation ? 'on' : 'off' }
+                onClick={ () => this.onClickStar(elemento) }
+                required
+              >
+                <span className="star">&#9733;</span>
+              </button>
+            ))}
           </div>
           <input
             data-testid="product-detail-evaluation"
