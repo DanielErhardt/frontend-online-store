@@ -95,6 +95,7 @@ export default class Home extends React.Component {
               thumbnail={ item.thumbnail }
               id={ item.id }
               addToCart={ addToCart }
+              product={ item }
             />
           ))}
         </div>
