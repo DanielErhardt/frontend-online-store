@@ -46,6 +46,8 @@ export default class Cart extends React.Component {
           uniqueItems.map((item) => (
             <CartItem
               key={ item.id }
+              chaengeQuantity={ this.changeQuantity }
+              removeAll={ this.removeAll }
               quantity={ this.getItemQuantity(item) }
               { ...item }
             />
