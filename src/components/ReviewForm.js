@@ -109,9 +109,3 @@ export default class CardsProducts extends Component {
     );
   }
 }
-
-// CardsProducts.propTypes = {
-//   title: PropTypes.string,
-//   thumbnail: PropTypes.string,
-//   price: PropTypes.string,
-// }.isRequired;

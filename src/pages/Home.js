@@ -2,7 +2,6 @@ import React from 'react';
 import CardsProducts from '../components/CardsProduct';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import CartButton from '../components/CartButton';
-import ReviewForm from '../components/ReviewForm';
 
 export default class Home extends React.Component {
   constructor() {
@@ -53,7 +52,6 @@ export default class Home extends React.Component {
     return (
       <section>
         {/* Código do Matheus */}
-        <ReviewForm />
         <form>
           <label data-testid="home-initial-message" htmlFor="input-search">
             Digite algum termo de pesquisa ou escolha uma categoria.
