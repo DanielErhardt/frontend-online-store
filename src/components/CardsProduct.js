@@ -21,7 +21,7 @@ export default class CardsProducts extends React.Component {
   render() {
     // Código do Matheus
     const { title, thumbnail, price, products } = this.props;
-    const { listaProducts } = this.state;
+    //const { listaProducts } = this.state;
     return (
       <div data-testid="product">
         <h2>{ title }</h2>
