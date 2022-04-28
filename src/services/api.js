@@ -31,3 +31,10 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
     return erro;
   }
 }
+
+export async function getProductDetails(productId) {
+  const endpoint = `https://api.mercadolibre.com/items/${productId}`;
+  const response = await fetch(endpoint);
+  const data = await response.json();
+  return data;
+}
