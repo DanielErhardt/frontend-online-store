@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductDetails } from '../services/api';
 import AddToCart from '../components/AddToCart';
+import CartButton from '../components/CartButton';
 
 export default class MoreDetails extends React.Component {
   constructor() {
@@ -26,18 +27,21 @@ export default class MoreDetails extends React.Component {
     const { match: { params: { id } }, addToCart } = this.props;
     const { produto } = this.state;
     return (
-      <section data-testid="product-detail-name">
-        {produto.attributes && produto.attributes.map((item) => (
-          <div key={ item.id }>
-            <p>{item.name}</p>
-            <p>{item.value_name}</p>
-          </div>
-        ))}
-        <AddToCart
-          addToCart={ addToCart }
-          id={ id }
-          testId="product-detail-add-to-cart"
-        />
+      <section>
+        <CartButton />
+        <div data-testid="product-detail-name">
+          {produto.attributes && produto.attributes.map((item) => (
+            <div key={ item.id }>
+              <p>{item.name}</p>
+              <p>{item.value_name}</p>
+            </div>
+          ))}
+          <AddToCart
+            addToCart={ addToCart }
+            id={ id }
+            testId="product-detail-add-to-cart"
+          />
+        </div>
       </section>
     );
   }
