@@ -20,13 +20,13 @@ export default class App extends React.Component {
     const product = await getProductDetails(id);
     this.setState({
       cartItems: [...cartItems, product],
-    }, () => console.log('add', this.state.cartItems));
+    });
   }
 
   updateCartItems = (newCartItems) => {
     this.setState({
       cartItems: newCartItems,
-    }, () => console.log('update', this.state.cartItems));
+    });
   }
 
   render() {
