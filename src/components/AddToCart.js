@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import saveProduct from '../helpers/saveProduct';
 
 export default class AddToCart extends React.Component {
   render() {
-    const { addToCart, id, testId } = this.props;
-    // console.log('id', id);
+    const { product, testId } = this.props;
 
     return (
       <div>
         <button
           type="button"
-          onClick={ () => addToCart(id) }
+          onClick={ () => saveProduct(product) }
           data-testid={ testId }
         >
           Adcionar ao carrinho
@@ -22,5 +22,5 @@ export default class AddToCart extends React.Component {
 
 AddToCart.propTypes = {
   id: PropTypes.string,
-  addToCart: PropTypes.func,
+  testId: PropTypes.string,
 }.isRequired;

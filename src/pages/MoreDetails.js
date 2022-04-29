@@ -22,10 +22,7 @@ export default class MoreDetails extends React.Component {
     });
   }
 
-  // marca, peso,
-
   render() {
-    const { match: { params: { id } }, addToCart } = this.props;
     const { produto } = this.state;
     return (
       <section>
@@ -41,8 +38,7 @@ export default class MoreDetails extends React.Component {
             </div>
           ))}
           <AddToCart
-            addToCart={ addToCart }
-            id={ id }
+            product={ produto }
             testId="product-detail-add-to-cart"
           />
         </div>

@@ -5,6 +5,7 @@ import CartItem from '../components/CartItem';
 import getProducts from '../helpers/getProducts';
 import saveProduct from '../helpers/saveProduct';
 import removeProduct from '../helpers/removeProduct';
+import overwriteProducts from '../helpers/overwriteProducts';
 
 export default class Cart extends React.Component {
   constructor() {
@@ -15,10 +16,13 @@ export default class Cart extends React.Component {
     };
   }
 
-  removeAll = (itemId) => {
-    const { updateCartItems, cartItems } = this.props;
+  removeAllSingleItem = (itemId) => {
+    const cartItems = getProducts();
     const filteredItems = cartItems.filter((item) => item.id !== itemId);
-    updateCartItems(filteredItems);
+    overwriteProducts(filteredItems);
+    this.setState({
+      cartItems: getProducts(),
+    });
   }
 
   changeQuantity = (itemId, increase) => {
@@ -38,7 +42,6 @@ export default class Cart extends React.Component {
 
   // Pega quantas vezes o produto aparece em cartItems e retorna o número
   getItemQuantity = (itemId) => {
-    // const { cartItems } = this.props;
     const cartItems = getProducts();
     const quantity = cartItems.filter((item) => item.id === itemId).length;
     return quantity;
@@ -68,7 +71,7 @@ export default class Cart extends React.Component {
             <CartItem
               key={ item.id }
               changeQuantity={ this.changeQuantity }
-              removeAll={ this.removeAll }
+              removeAll={ this.removeAllSingleItem }
               quantity={ this.getItemQuantity(item.id) }
               { ...item }
             />
