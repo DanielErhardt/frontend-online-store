@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import saveEvaluation from '../helpers/saveEvaluation';
 import getEvaluations from '../helpers/getEvaluations';
-// import PropTypes from 'prop-types';
 
-export default class CardsProducts extends Component {
+export default class ReviewForm extends Component {
   constructor() {
     super();
     this.state = {
       email: '',
       evaluation: '',
       mensagem: '',
+      // id: '',
       hasEvaluation: false,
       evaluations: [],
     };
@@ -17,6 +18,8 @@ export default class CardsProducts extends Component {
 
   componentDidMount = () => {
     console.log('evaluations_salvos', localStorage);
+    // const { id } = this.props;
+    // console.log('id', id);
     if (getEvaluations() === null) {
       console.log('Entrou na condição null');
       this.setState({
@@ -38,6 +41,7 @@ export default class CardsProducts extends Component {
     console.log('target', target);
     this.setState({
       [target.name]: target.value,
+      // id,
     });
   }
 
@@ -51,10 +55,12 @@ export default class CardsProducts extends Component {
   onClickEnter = (event) => {
     event.preventDefault();
     const { email, evaluation, mensagem } = this.state;
+    const { id } = this.props;
     const evaluationObj = {
       email,
       evaluation,
       mensagem,
+      id,
     };
     console.log('Entrou em onClickEnter');
     console.log(email, evaluation, mensagem);
@@ -63,11 +69,14 @@ export default class CardsProducts extends Component {
       email: '',
       evaluation: '',
       mensagem: '',
+      // id: '',
     });
   }
 
   render() {
     // Código do Samuel
+    const { id } = this.props;
+    console.log('id', id);
     const { hasEvaluation, evaluations } = this.state;
     const TRES = 3;
     const QUATRO = 4;
@@ -126,15 +135,29 @@ export default class CardsProducts extends Component {
             Avaliar
           </button>
         </form>
-        {/* {
+        {
           hasEvaluation
             && (
               <p>
-                { evaluations }
+                { evaluations.map((elemento) => (
+                  <div key={ elemento.id }>
+                    <span>
+                      { elemento.email }
+                      { elemento.evaluation }
+                    </span>
+                    <p>
+                      { elemento.mensagem }
+                    </p>
+                  </div>
+                )) }
               </p>
             )
-        } */}
+        }
       </section>
     );
   }
 }
+
+ReviewForm.propTypes = {
+  id: PropTypes.string,
+}.isRequired;

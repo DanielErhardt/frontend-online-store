@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default class AddToCart extends React.Component {
   render() {
     const { addToCart, id, testId } = this.props;
+    // console.log('id', id);
 
     return (
       <div>

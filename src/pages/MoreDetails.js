@@ -29,7 +29,9 @@ export default class MoreDetails extends React.Component {
     const { produto } = this.state;
     return (
       <section>
-        <ReviewForm />
+        <ReviewForm
+          id={ produto.id }
+        />
         <CartButton />
         <div data-testid="product-detail-name">
           {produto.attributes && produto.attributes.map((item) => (
