@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { getProductDetails } from '../services/api';
 import AddToCart from '../components/AddToCart';
 import CartButton from '../components/CartButton';
+import ReviewForm from '../components/ReviewForm';
 
 export default class MoreDetails extends React.Component {
   constructor() {
@@ -28,6 +29,7 @@ export default class MoreDetails extends React.Component {
     const { produto } = this.state;
     return (
       <section>
+        <ReviewForm />
         <CartButton />
         <div data-testid="product-detail-name">
           {produto.attributes && produto.attributes.map((item) => (

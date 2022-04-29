@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import saveEvaluation from '../helpers/saveEvaluation';
+import getEvaluations from '../helpers/getEvaluations';
 // import PropTypes from 'prop-types';
 
 export default class CardsProducts extends Component {
@@ -9,7 +10,27 @@ export default class CardsProducts extends Component {
       email: '',
       evaluation: '',
       mensagem: '',
+      hasEvaluation: false,
+      evaluations: [],
     };
+  }
+
+  componentDidMount = () => {
+    console.log('evaluations_salvos', localStorage);
+    if (getEvaluations() === null) {
+      console.log('Entrou na condição null');
+      this.setState({
+        hasEvaluation: false,
+      });
+    } else {
+      console.log('Entrou no else');
+      console.log(getEvaluations());
+      const evaluationsStorage = getEvaluations();
+      this.setState({
+        hasEvaluation: true,
+        evaluations: evaluationsStorage,
+      });
+    }
   }
 
   onInputChange = ({ target }) => {
@@ -47,6 +68,7 @@ export default class CardsProducts extends Component {
 
   render() {
     // Código do Samuel
+    const { hasEvaluation, evaluations } = this.state;
     const TRES = 3;
     const QUATRO = 4;
     const CINCO = 5;
@@ -73,7 +95,7 @@ export default class CardsProducts extends Component {
           <div className="evaluationStar">
             {xablau.map((elemento, index) => (
               <button
-                data-testid={ `${index}-rating` }
+                data-testid={ `${index + 1}-rating` }
                 type="button"
                 name="evaluation"
                 value={ elemento }
@@ -104,8 +126,15 @@ export default class CardsProducts extends Component {
             Avaliar
           </button>
         </form>
+        {/* {
+          hasEvaluation
+            && (
+              <p>
+                { evaluations }
+              </p>
+            )
+        } */}
       </section>
-
     );
   }
 }

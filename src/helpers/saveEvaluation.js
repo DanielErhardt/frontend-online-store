@@ -5,9 +5,10 @@ const saveEvaluation = (evaluationObj) => {
   console.log('evaluationObj', evaluationObj);
   if (getEvaluations() === null) {
     console.log('Entrou na condição null');
-    localStorage.setItem('evaluations', JSON.stringify(evaluationObj));
+    localStorage.setItem('evaluations', JSON.stringify([evaluationObj]));
   } else {
     console.log('Entrou no else');
+    console.log(getEvaluations());
     localStorage.setItem(
       'evaluations',
       // O JSON.parse transforma a string em JSON novamente, o inverso do JSON.strigify
