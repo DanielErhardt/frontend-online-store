@@ -16,24 +16,17 @@ export default class ReviewForm extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     console.log('evaluations_salvos', localStorage);
     // const { id } = this.props;
     // console.log('id', id);
-    if (getEvaluations() === null) {
-      console.log('Entrou na condição null');
-      this.setState({
-        hasEvaluation: false,
-      });
-    } else {
-      console.log('Entrou no else');
-      console.log(getEvaluations());
-      const evaluationsStorage = getEvaluations();
-      this.setState({
-        hasEvaluation: true,
-        evaluations: evaluationsStorage,
-      });
-    }
+    const hasEvaluation = getEvaluations() !== null;
+    console.log('Entrou no else');
+    console.log(getEvaluations());
+    this.setState({
+      hasEvaluation,
+      evaluations: hasEvaluation ? getEvaluations() : [],
+    });
   }
 
   onInputChange = ({ target }) => {
@@ -52,7 +45,7 @@ export default class ReviewForm extends Component {
     });
   }
 
-  onClickEnter = (event) => {
+  onClickEvaluate = (event) => {
     event.preventDefault();
     const { email, evaluation, mensagem } = this.state;
     const { id } = this.props;
@@ -69,15 +62,14 @@ export default class ReviewForm extends Component {
       email: '',
       evaluation: '',
       mensagem: '',
-      // id: '',
+      // evaluations: getEvaluations() === null ? [] : getEvaluations(),
     });
   }
 
   render() {
     // Código do Samuel
-    const { id } = this.props;
-    console.log('id', id);
     const { hasEvaluation, evaluations } = this.state;
+    console.log('evaluations', evaluations);
     const TRES = 3;
     const QUATRO = 4;
     const CINCO = 5;
@@ -130,7 +122,7 @@ export default class ReviewForm extends Component {
             data-testid="submit-review-btn"
             // Habilitado ou desabilitado conforme as condições de verificação
             // disabled={ isSaveButtonDisabled }
-            onClick={ this.onClickEnter }
+            onClick={ this.onClickEvaluate }
           >
             Avaliar
           </button>
@@ -138,19 +130,18 @@ export default class ReviewForm extends Component {
         {
           hasEvaluation
             && (
-              <p>
+              <section>
                 { evaluations.map((elemento) => (
-                  <div key={ elemento.id }>
+                  <div key={ elemento.email }>
                     <span>
-                      { elemento.email }
-                      { elemento.evaluation }
+                      <p>{`${elemento.email} ${elemento.evaluation}`}</p>
                     </span>
                     <p>
                       { elemento.mensagem }
                     </p>
                   </div>
                 )) }
-              </p>
+              </section>
             )
         }
       </section>
