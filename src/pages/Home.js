@@ -28,7 +28,7 @@ export default class Home extends React.Component {
 
   // Código do Matheus
   getValueInput = ({ target }) => {
-    console.log('valor digitado', target.value);
+    // console.log('valor digitado', target.value);
     this.setState({
       [target.name]: target.value,
     }, async () => {
@@ -42,7 +42,7 @@ export default class Home extends React.Component {
     const products = (
       await getProductsFromCategoryAndQuery(`${categoria}`, `${queryResult}`)
     );
-    console.log('products', products.results);
+    // console.log('products', products.results);
     this.setState({
       products: products.results,
     });

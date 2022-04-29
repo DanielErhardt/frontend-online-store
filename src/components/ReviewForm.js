@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import saveEvaluation from '../helpers/saveEvaluation';
 import getEvaluations from '../helpers/getEvaluations';
+import { getProductDetails } from '../services/api';
 
 export default class ReviewForm extends Component {
   constructor() {
     super();
     this.state = {
       email: '',
-      evaluation: '',
+      rating: '',
       mensagem: '',
       // id: '',
       hasEvaluation: false,
@@ -17,12 +18,12 @@ export default class ReviewForm extends Component {
   }
 
   componentDidMount() {
-    console.log('evaluations_salvos', localStorage);
+    // console.log('evaluations_salvos', localStorage);
     // const { id } = this.props;
     // console.log('id', id);
     const hasEvaluation = getEvaluations() !== null;
-    console.log('Entrou no else');
-    console.log(getEvaluations());
+    // console.log('Entrou no else');
+    // console.log(getEvaluations());
     this.setState({
       hasEvaluation,
       evaluations: hasEvaluation ? getEvaluations() : [],
@@ -30,8 +31,8 @@ export default class ReviewForm extends Component {
   }
 
   onInputChange = ({ target }) => {
-    console.log('Entrou em InputChange');
-    console.log('target', target);
+    // console.log('Entrou em InputChange');
+    // console.log('target', target);
     this.setState({
       [target.name]: target.value,
       // id,
@@ -39,47 +40,43 @@ export default class ReviewForm extends Component {
   }
 
   onClickStar = (param) => {
-    console.log(param);
+    // console.log(param);
     this.setState({
-      evaluation: param,
+      rating: param,
     });
   }
 
-  onClickEvaluate = (event) => {
+  onClickEvaluate = async (event) => {
     event.preventDefault();
-    const { email, evaluation, mensagem } = this.state;
+    const { email, rating, mensagem } = this.state;
     const { id } = this.props;
+    await getProductDetails(id);
     const evaluationObj = {
       email,
-      evaluation,
+      rating,
       mensagem,
       id,
     };
-    console.log('Entrou em onClickEnter');
-    console.log(email, evaluation, mensagem);
+    // console.log('Entrou em onClickEnter');
+    // console.log(email, rating, mensagem);
     saveEvaluation(evaluationObj);
     this.setState({
       email: '',
-      evaluation: '',
+      rating: '',
       mensagem: '',
-      // evaluations: getEvaluations() === null ? [] : getEvaluations(),
+      evaluations: getEvaluations() === null ? [] : getEvaluations(),
     });
   }
 
   render() {
     // Código do Samuel
-    const { hasEvaluation, evaluations } = this.state;
-    console.log('evaluations', evaluations);
-    const TRES = 3;
-    const QUATRO = 4;
+    const { hasEvaluation, evaluations, email, rating, mensagem } = this.state;
+    // console.log('evaluations', evaluations);
     const CINCO = 5;
-    const xablau = [1, 2, TRES, QUATRO, CINCO];
-    const { email, evaluation, mensagem } = this.state;
-    // console.log(xlablau);
-    // const arrayX = [];
-    // for (let index = 1; index === CINCO; index += 1) {
-    //   arrayX.push(index);
-    // }
+    const reviewStars = [];
+    for (let i = 1; i <= CINCO; i += 1) {
+      reviewStars.push(i);
+    }
     return (
       <section>
         <h3>Avaliações</h3>
@@ -93,15 +90,15 @@ export default class ReviewForm extends Component {
             onChange={ this.onInputChange }
             required
           />
-          <div className="evaluationStar">
-            {xablau.map((elemento, index) => (
+          <div className="ratingStar">
+            {reviewStars.map((elemento, index) => (
               <button
                 data-testid={ `${index + 1}-rating` }
                 type="button"
-                name="evaluation"
+                name="rating"
                 value={ elemento }
                 key={ index }
-                className={ index <= evaluation ? 'on' : 'off' }
+                className={ index <= rating ? 'on' : 'off' }
                 onClick={ () => this.onClickStar(elemento) }
                 required
               >
@@ -131,10 +128,11 @@ export default class ReviewForm extends Component {
           hasEvaluation
             && (
               <section>
-                { evaluations.map((elemento) => (
-                  <div key={ elemento.email }>
+                { evaluations.map((elemento, index) => (
+                  <div key={ `${elemento.id}review${index}` }>
                     <span>
-                      <p>{`${elemento.email} ${elemento.evaluation}`}</p>
+                      <p>{ elemento.email }</p>
+                      <p>{ elemento.rating }</p>
                     </span>
                     <p>
                       { elemento.mensagem }
