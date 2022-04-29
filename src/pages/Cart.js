@@ -2,36 +2,53 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
+import getProducts from '../helpers/getProducts';
+import saveProduct from '../helpers/saveProduct';
+import removeProduct from '../helpers/removeProduct';
+import overwriteProducts from '../helpers/overwriteProducts';
 
 export default class Cart extends React.Component {
-  removeAll = (itemId) => {
-    const { updateCartItems, cartItems } = this.props;
+  constructor() {
+    super();
+
+    this.state = {
+      cartItems: getProducts() || [],
+    };
+  }
+
+  removeAllSingleItem = (itemId) => {
+    const cartItems = getProducts();
     const filteredItems = cartItems.filter((item) => item.id !== itemId);
-    updateCartItems(filteredItems);
+    overwriteProducts(filteredItems);
+    this.setState({
+      cartItems: getProducts(),
+    });
   }
 
   changeQuantity = (itemId, increase) => {
-    const { updateCartItems, cartItems } = this.props;
+    const cartItems = getProducts();
     const itemWithId = cartItems.find((item) => item.id === itemId);
 
     if (increase) {
-      cartItems.push(itemWithId);
+      saveProduct(itemWithId);
     } else {
-      const index = cartItems.indexOf(itemWithId);
-      cartItems.splice(index, 1);
+      removeProduct(itemWithId);
     }
-    updateCartItems(cartItems);
+
+    this.setState({
+      cartItems: getProducts(),
+    });
   }
 
   // Pega quantas vezes o produto aparece em cartItems e retorna o número
   getItemQuantity = (itemId) => {
-    const { cartItems } = this.props;
+    const cartItems = getProducts();
     const quantity = cartItems.filter((item) => item.id === itemId).length;
     return quantity;
   }
 
   render() {
-    const { cartItems } = this.props;
+    const { cartItems } = this.state;
 
     // Faz uma lista com os itens do carrinho sem elementos repetidos.
     // Não entendemos o que tá acontecendo. Tiramos o código do google.
@@ -54,7 +71,7 @@ export default class Cart extends React.Component {
             <CartItem
               key={ item.id }
               changeQuantity={ this.changeQuantity }
-              removeAll={ this.removeAll }
+              removeAll={ this.removeAllSingleItem }
               quantity={ this.getItemQuantity(item.id) }
               { ...item }
             />

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { getProductDetails } from '../services/api';
 import AddToCart from '../components/AddToCart';
 import CartButton from '../components/CartButton';
+import ReviewForm from '../components/ReviewForm';
 
 export default class MoreDetails extends React.Component {
   constructor() {
@@ -21,13 +22,13 @@ export default class MoreDetails extends React.Component {
     });
   }
 
-  // marca, peso,
-
   render() {
-    const { match: { params: { id } }, addToCart } = this.props;
     const { produto } = this.state;
     return (
       <section>
+        <ReviewForm
+          id={ produto.id }
+        />
         <CartButton />
         <div data-testid="product-detail-name">
           {produto.attributes && produto.attributes.map((item) => (
@@ -37,8 +38,7 @@ export default class MoreDetails extends React.Component {
             </div>
           ))}
           <AddToCart
-            addToCart={ addToCart }
-            id={ id }
+            product={ produto }
             testId="product-detail-add-to-cart"
           />
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import CardsProducts from '../components/CardsProduct';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import CartButton from '../components/CartButton';
@@ -16,7 +16,7 @@ export default class Home extends React.Component {
   }
 
   // No DidMount chama faz a requisição das cartegorias na API
-  // Começa o Requisito 6
+  // Começa o Requisito 11
   async componentDidMount() {
     // console.log('entrou');
     const resposta = await getCategories();
@@ -28,7 +28,7 @@ export default class Home extends React.Component {
 
   // Código do Matheus
   getValueInput = ({ target }) => {
-    console.log('valor digitado', target.value);
+    // console.log('valor digitado', target.value);
     this.setState({
       [target.name]: target.value,
     }, async () => {
@@ -42,27 +42,15 @@ export default class Home extends React.Component {
     const products = (
       await getProductsFromCategoryAndQuery(`${categoria}`, `${queryResult}`)
     );
-    console.log('products', products.results);
+    // console.log('products', products.results);
     this.setState({
       products: products.results,
     });
   }
 
-  // Código do Samuel
-  // OnClickChange = async ({ target }) => {
-  //   // console.log('Entrou em ClickChange');
-  //   console.log(target.value);
-  //   const categoria = target.value;
-  //   const products = await getProductsFromCategoryAndQuery('', categoria);
-  //   console.log('products', products);
-  //   this.setState({
-  //     products: products.results,
-  //   });
-  // }
-
   render() {
     const { categoriasLista, products, queryResult } = this.state;
-    const { addToCart } = this.props;
+    // const { addToCart } = this.props;
     return (
       <section>
         {/* Código do Daniel */}
@@ -95,8 +83,6 @@ export default class Home extends React.Component {
               title={ item.title }
               price={ item.price }
               thumbnail={ item.thumbnail }
-              id={ item.id }
-              addToCart={ addToCart }
               product={ item }
             />
           ))}
@@ -128,6 +114,6 @@ export default class Home extends React.Component {
   }
 }
 
-Home.propTypes = {
-  addToCart: PropTypes.func,
-}.isRequired;
+// Home.propTypes = {
+//   addToCart: PropTypes.func,
+// }.isRequired;
