@@ -5,32 +5,39 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import { getProductDetails } from './services/api';
 import MoreDetails from './pages/MoreDetails';
+import saveProduct from './helpers/saveProduct';
 
 export default class App extends React.Component {
-  constructor() {
-    super();
+  // constructor() {
+  //   super();
 
-    this.state = {
-      cartItems: [],
-    };
-  }
+  //   this.state = {
+  //     cartItems: [],
+  //   };
+  // }
 
   addToCart = async (id) => { // chamar essa funçao nos botoes de adcionar ao carrinho
-    const { cartItems } = this.state;
+    // const { cartItems } = this.state;
     const product = await getProductDetails(id);
-    this.setState({
-      cartItems: [...cartItems, product],
-    });
+    saveProduct(product);
+    // this.setState({
+    //   cartItems: [...cartItems, product],
+    // });
   }
 
-  updateCartItems = (newCartItems) => {
-    this.setState({
-      cartItems: newCartItems,
-    });
+  // updateCartItems = (newCartItems) => {
+  //   this.setState({
+  //     cartItems: newCartItems,
+  //   });
+  // }
+
+  updateCartItems = async (itemId) => {
+    const product = await getProductDetails(itemId);
+    saveProduct(product);
   }
 
   render() {
-    const { cartItems } = this.state;
+    // const { cartItems } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -49,7 +56,7 @@ export default class App extends React.Component {
             render={ (props) => (
               <Cart
                 { ...props }
-                cartItems={ cartItems }
+                // cartItems={ cartItems }
                 updateCartItems={ this.updateCartItems }
               />
             ) }

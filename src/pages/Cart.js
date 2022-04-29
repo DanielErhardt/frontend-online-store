@@ -2,8 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
+import getProducts from '../helpers/getProducts';
+import saveProduct from '../helpers/saveProduct';
+import removeProduct from '../helpers/removeProduct';
 
 export default class Cart extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      cartItems: getProducts() || [],
+    };
+  }
+
   removeAll = (itemId) => {
     const { updateCartItems, cartItems } = this.props;
     const filteredItems = cartItems.filter((item) => item.id !== itemId);
@@ -11,27 +22,30 @@ export default class Cart extends React.Component {
   }
 
   changeQuantity = (itemId, increase) => {
-    const { updateCartItems, cartItems } = this.props;
+    const cartItems = getProducts();
     const itemWithId = cartItems.find((item) => item.id === itemId);
 
     if (increase) {
-      cartItems.push(itemWithId);
+      saveProduct(itemWithId);
     } else {
-      const index = cartItems.indexOf(itemWithId);
-      cartItems.splice(index, 1);
+      removeProduct(itemWithId);
     }
-    updateCartItems(cartItems);
+
+    this.setState({
+      cartItems: getProducts(),
+    });
   }
 
   // Pega quantas vezes o produto aparece em cartItems e retorna o número
   getItemQuantity = (itemId) => {
-    const { cartItems } = this.props;
+    // const { cartItems } = this.props;
+    const cartItems = getProducts();
     const quantity = cartItems.filter((item) => item.id === itemId).length;
     return quantity;
   }
 
   render() {
-    const { cartItems } = this.props;
+    const { cartItems } = this.state;
 
     // Faz uma lista com os itens do carrinho sem elementos repetidos.
     // Não entendemos o que tá acontecendo. Tiramos o código do google.
