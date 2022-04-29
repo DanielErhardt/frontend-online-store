@@ -11,7 +11,6 @@ export default class ReviewForm extends Component {
       email: '',
       rating: '',
       mensagem: '',
-      // id: '',
       hasEvaluation: false,
       evaluations: [],
     };
@@ -60,10 +59,12 @@ export default class ReviewForm extends Component {
     // console.log('Entrou em onClickEnter');
     // console.log(email, rating, mensagem);
     saveEvaluation(evaluationObj);
+    const hasEvaluation = getEvaluations() !== null;
     this.setState({
       email: '',
       rating: '',
       mensagem: '',
+      hasEvaluation,
       evaluations: getEvaluations() === null ? [] : getEvaluations(),
     });
   }
