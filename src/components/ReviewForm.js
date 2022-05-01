@@ -118,8 +118,6 @@ export default class ReviewForm extends Component {
           <button
             type="submit"
             data-testid="submit-review-btn"
-            // Habilitado ou desabilitado conforme as condições de verificação
-            // disabled={ isSaveButtonDisabled }
             onClick={ this.onClickEvaluate }
           >
             Avaliar
@@ -130,15 +128,18 @@ export default class ReviewForm extends Component {
             && (
               <section>
                 { evaluations.map((elemento, index) => (
-                  <div key={ `${elemento.id}review${index}` }>
-                    <span>
-                      <p>{ elemento.email }</p>
-                      <p>{ elemento.rating }</p>
-                    </span>
-                    <p>
-                      { elemento.mensagem }
-                    </p>
-                  </div>
+                  (elemento.id === id)
+                      && (
+                        <div key={ `${elemento.id}review${index}` }>
+                          <span>
+                            <p>{ elemento.email }</p>
+                            <p>{ elemento.rating }</p>
+                          </span>
+                          <p>
+                            { elemento.mensagem }
+                          </p>
+                        </div>
+                      )
                 )) }
               </section>
             )
