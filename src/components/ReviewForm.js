@@ -72,6 +72,7 @@ export default class ReviewForm extends Component {
   render() {
     // Código do Samuel
     const { hasEvaluation, evaluations, email, rating, mensagem } = this.state;
+    const { id } = this.props;
     // console.log('evaluations', evaluations);
     const CINCO = 5;
     const reviewStars = [];
@@ -118,6 +119,8 @@ export default class ReviewForm extends Component {
           <button
             type="submit"
             data-testid="submit-review-btn"
+            // Habilitado ou desabilitado conforme as condições de verificação
+            // disabled={ isSaveButtonDisabled }
             onClick={ this.onClickEvaluate }
           >
             Avaliar
