@@ -8,13 +8,11 @@ export default class CheckoutCard extends Component {
 
     const multipliedPrice = price * quantity;
     return (
-      <section>
-        <div>
-          <img src={ thumbnail } alt="" />
-          <p>{ title }</p>
-          <p>{ `R$ ${multipliedPrice}` }</p>
-        </div>
-      </section>
+      <div>
+        <img src={ thumbnail } alt="" />
+        <p>{ title }</p>
+        <p>{ `R$ ${multipliedPrice}` }</p>
+      </div>
     );
   }
 }
