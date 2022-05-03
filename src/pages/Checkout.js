@@ -151,7 +151,6 @@ export default class Checkout extends Component {
             required
           />
           <input
-            // data-testid="product-detail-evaluation"
             type="text"
             placeholder="Cidade"
             name="cidade"
