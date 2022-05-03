@@ -47,6 +47,12 @@ export default class Cart extends React.Component {
     return quantity;
   }
 
+  finalizarCompra = () => {
+    const { history } = this.props;
+    console.log('Entrou em finalizarCompra');
+    history.push('/checkout');
+  }
+
   render() {
     const { cartItems } = this.state;
 
@@ -80,6 +86,13 @@ export default class Cart extends React.Component {
         <div>
           { `Total: R$${totalPrice}` }
         </div>
+        <button
+          type="button"
+          onClick={ this.finalizarCompra }
+          data-testid="checkout-products"
+        >
+          Finalizar Compra
+        </button>
       </section>
     );
   }
@@ -87,5 +100,6 @@ export default class Cart extends React.Component {
 
 Cart.propTypes = {
   cartItems: PropTypes.arrayOf(PropTypes.shape),
+  history: PropTypes.shape,
   updateCartItems: PropTypes.func,
 }.isRequired;

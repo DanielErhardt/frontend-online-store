@@ -26,9 +26,6 @@ export default class MoreDetails extends React.Component {
     const { produto } = this.state;
     return (
       <section>
-        <ReviewForm
-          id={ produto.id }
-        />
         <CartButton />
         <div data-testid="product-detail-name">
           {produto.attributes && produto.attributes.map((item) => (
@@ -40,6 +37,9 @@ export default class MoreDetails extends React.Component {
           <AddToCart
             product={ produto }
             testId="product-detail-add-to-cart"
+          />
+          <ReviewForm
+            id={ produto.id }
           />
         </div>
       </section>

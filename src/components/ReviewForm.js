@@ -72,6 +72,7 @@ export default class ReviewForm extends Component {
   render() {
     // Código do Samuel
     const { hasEvaluation, evaluations, email, rating, mensagem } = this.state;
+    const { id } = this.props;
     // console.log('evaluations', evaluations);
     const CINCO = 5;
     const reviewStars = [];
@@ -130,15 +131,18 @@ export default class ReviewForm extends Component {
             && (
               <section>
                 { evaluations.map((elemento, index) => (
-                  <div key={ `${elemento.id}review${index}` }>
-                    <span>
-                      <p>{ elemento.email }</p>
-                      <p>{ elemento.rating }</p>
-                    </span>
-                    <p>
-                      { elemento.mensagem }
-                    </p>
-                  </div>
+                  (elemento.id === id)
+                      && (
+                        <div key={ `${elemento.id}review${index}` }>
+                          <span>
+                            <p>{ elemento.email }</p>
+                            <p>{ elemento.rating }</p>
+                          </span>
+                          <p>
+                            { elemento.mensagem }
+                          </p>
+                        </div>
+                      )
                 )) }
               </section>
             )
