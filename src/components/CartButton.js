@@ -9,6 +9,9 @@ export default class CartButton extends React.Component {
       <Link to="/cart" data-testid="shopping-cart-button">
         {/* <h3>Ir para o Carrinho</h3> */}
         <img className="cartLogo" src={ cartLogo } alt="Carrinho" />
+        <div data-testid="shopping-cart-size">
+          <p>x</p>
+        </div>
       </Link>
     );
   }
