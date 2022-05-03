@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getProductDetails } from '../services/api';
 import AddToCart from '../components/AddToCart';
 import CartButton from '../components/CartButton';
@@ -26,6 +27,7 @@ export default class MoreDetails extends React.Component {
     const { produto } = this.state;
     return (
       <section>
+        <Link to="/">Voltar</Link>
         <CartButton />
         <div data-testid="product-detail-name">
           {produto.attributes && produto.attributes.map((item) => (

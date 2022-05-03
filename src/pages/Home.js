@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import CardsProducts from '../components/CardsProduct';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import CartButton from '../components/CartButton';
@@ -53,8 +53,8 @@ export default class Home extends React.Component {
     // const { addToCart } = this.props;
     return (
       <section>
+        <Link to="/">Voltar</Link>
         {/* Código do Daniel */}
-        <CartButton />
         {/* Código do Matheus */}
         <form>
           <label data-testid="home-initial-message" htmlFor="input-search">
@@ -76,6 +76,7 @@ export default class Home extends React.Component {
             Pesquisar
           </button>
         </form>
+        <CartButton />
         <div>
           {products.map((item) => (
             <CardsProducts
