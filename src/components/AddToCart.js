@@ -5,9 +5,7 @@ import saveProduct from '../helpers/saveProduct';
 export default class AddToCart extends React.Component {
   onclickAddOnCart = (product) => {
     const { quantityUpdateCart } = this.props;
-    console.log('entrou em onclickAddOnCart');
     saveProduct(product);
-    console.log('aqui');
     quantityUpdateCart();
   }
 

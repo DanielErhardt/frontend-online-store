@@ -20,8 +20,6 @@ export default class App extends React.Component {
   }
 
   quantityUpdate = () => {
-    console.log('entrou em quantityUpdate');
-    // console.log(boolean);
     let quantity = 0;
     let index = 0;
     const cartItems = getProducts() || [];
