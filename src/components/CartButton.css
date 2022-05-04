@@ -1,10 +1,7 @@
 .cartLogo {
   width: 35px;
-  /* display: flex; */
-  /* flex-flow: row; */
 }
 
 .cartLogoMain {
   display: flex;
-  /* flex-flow: row; */
 }
