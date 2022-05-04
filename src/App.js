@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import MoreDetails from './pages/MoreDetails';
 import Checkout from './pages/Checkout';
+import getProducts from './helpers/getProducts';
 
 export default class App extends React.Component {
   constructor() {
@@ -15,10 +16,12 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    quantityUpdate();
+    this.quantityUpdate();
   }
 
   quantityUpdate = () => {
+    console.log('entrou em quantityUpdate');
+    // console.log(boolean);
     let quantity = 0;
     let index = 0;
     const cartItems = getProducts() || [];
@@ -40,7 +43,7 @@ export default class App extends React.Component {
             exact
             path="/"
             render={ (props) => (
-              // Repassa as props recebidas do App para o componente da page Login
+              // Repassa as props recebidas do App para o componente da page Home
               // Junto passa as props do Router para poder fazer uso do History, por exemplo
               <Home
                 { ...props }

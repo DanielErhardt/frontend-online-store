@@ -6,7 +6,8 @@ import AddToCart from './AddToCart';
 export default class CardsProducts extends React.Component {
   render() {
     // Código do Matheus
-    const { title, thumbnail, price, addToCart, product } = this.props;
+    const { title, thumbnail, price, addToCart, product,
+      quantityUpdateHome } = this.props;
     return (
       <div data-testid="product">
         <h2>{ title }</h2>
@@ -16,6 +17,7 @@ export default class CardsProducts extends React.Component {
         </p>
         <img src={ thumbnail } alt="" />
         <AddToCart
+          quantityUpdateCart={ quantityUpdateHome }
           addToCart={ addToCart }
           product={ product }
           testId="product-add-to-cart"
@@ -37,4 +39,5 @@ CardsProducts.propTypes = {
   thumbnail: PropTypes.string,
   price: PropTypes.string,
   addToCart: PropTypes.func,
+  quantityUpdateHome: PropTypes.func,
 }.isRequired;

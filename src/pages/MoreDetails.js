@@ -25,6 +25,7 @@ export default class MoreDetails extends React.Component {
 
   render() {
     const { produto } = this.state;
+    const { quantityUpdate } = this.props;
     return (
       <section>
         <Link to="/">Voltar</Link>
@@ -37,6 +38,7 @@ export default class MoreDetails extends React.Component {
             </div>
           ))}
           <AddToCart
+            quantityUpdateCart={ quantityUpdate }
             product={ produto }
             testId="product-detail-add-to-cart"
           />
@@ -51,4 +53,5 @@ export default class MoreDetails extends React.Component {
 
 MoreDetails.propTypes = {
   id: PropTypes.string,
+  quantityUpdate: PropTypes.func,
 }.isRequired;
