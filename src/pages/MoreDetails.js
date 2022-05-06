@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getProductDetails } from '../services/api';
 import AddToCart from '../components/AddToCart';
 import CartButton from '../components/CartButton';
@@ -24,8 +25,10 @@ export default class MoreDetails extends React.Component {
 
   render() {
     const { produto } = this.state;
+    const { quantityUpdate } = this.props;
     return (
       <section>
+        <Link to="/">Voltar</Link>
         <CartButton />
         <div data-testid="product-detail-name">
           {produto.attributes && produto.attributes.map((item) => (
@@ -35,6 +38,7 @@ export default class MoreDetails extends React.Component {
             </div>
           ))}
           <AddToCart
+            quantityUpdateCart={ quantityUpdate }
             product={ produto }
             testId="product-detail-add-to-cart"
           />
@@ -49,4 +53,5 @@ export default class MoreDetails extends React.Component {
 
 MoreDetails.propTypes = {
   id: PropTypes.string,
+  quantityUpdate: PropTypes.func,
 }.isRequired;

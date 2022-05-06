@@ -1,5 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import CardsProducts from '../components/CardsProduct';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import CartButton from '../components/CartButton';
@@ -50,11 +51,12 @@ export default class Home extends React.Component {
 
   render() {
     const { categoriasLista, products, queryResult } = this.state;
-    // const { addToCart } = this.props;
+    const { quantityUpdate } = this.props;
+    // console.log(quantityUpdate);
     return (
       <section>
+        <Link to="/">Voltar</Link>
         {/* Código do Daniel */}
-        <CartButton />
         {/* Código do Matheus */}
         <form>
           <label data-testid="home-initial-message" htmlFor="input-search">
@@ -76,6 +78,7 @@ export default class Home extends React.Component {
             Pesquisar
           </button>
         </form>
+        <CartButton />
         <div>
           {products.map((item) => (
             <CardsProducts
@@ -84,6 +87,7 @@ export default class Home extends React.Component {
               price={ item.price }
               thumbnail={ item.thumbnail }
               product={ item }
+              quantityUpdateHome={ quantityUpdate }
             />
           ))}
         </div>
@@ -114,6 +118,7 @@ export default class Home extends React.Component {
   }
 }
 
-// Home.propTypes = {
-//   addToCart: PropTypes.func,
-// }.isRequired;
+Home.propTypes = {
+  quantity: PropTypes.number,
+  quantityUpdate: PropTypes.func,
+}.isRequired;

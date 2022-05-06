@@ -17,22 +17,27 @@ export default class Cart extends React.Component {
   }
 
   removeAllSingleItem = (itemId) => {
+    const { quantityUpdate } = this.props;
     const cartItems = getProducts();
     const filteredItems = cartItems.filter((item) => item.id !== itemId);
     overwriteProducts(filteredItems);
     this.setState({
       cartItems: getProducts(),
     });
+    quantityUpdate();
   }
 
   changeQuantity = (itemId, increase) => {
+    const { quantityUpdate } = this.props;
     const cartItems = getProducts();
     const itemWithId = cartItems.find((item) => item.id === itemId);
 
     if (increase) {
       saveProduct(itemWithId);
+      quantityUpdate();
     } else {
       removeProduct(itemWithId);
+      quantityUpdate();
     }
 
     this.setState({
@@ -102,4 +107,5 @@ Cart.propTypes = {
   cartItems: PropTypes.arrayOf(PropTypes.shape),
   history: PropTypes.shape,
   updateCartItems: PropTypes.func,
+  quantityUpdate: PropTypes.func,
 }.isRequired;

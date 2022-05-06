@@ -5,24 +5,70 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import MoreDetails from './pages/MoreDetails';
 import Checkout from './pages/Checkout';
+import getProducts from './helpers/getProducts';
 
 export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      quantity: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.quantityUpdate();
+  }
+
+  quantityUpdate = () => {
+    let quantity = 0;
+    let index = 0;
+    const cartItems = getProducts() || [];
+    while (index < cartItems.length) {
+      quantity += 1;
+      index += 1;
+    }
+    this.setState({
+      quantity,
+    });
+  }
+
   render() {
+    const { quantity } = this.state;
     return (
       <BrowserRouter>
         <Switch>
           <Route
             exact
             path="/"
-            component={ Home }
+            render={ (props) => (
+              // Repassa as props recebidas do App para o componente da page Home
+              // Junto passa as props do Router para poder fazer uso do History, por exemplo
+              <Home
+                { ...props }
+                quantity={ quantity }
+                quantityUpdate={ this.quantityUpdate }
+              />
+            ) }
           />
           <Route
             path="/cart"
-            component={ Cart }
+            render={ (props) => (
+              <Cart
+                { ...props }
+                quantity={ quantity }
+                quantityUpdate={ this.quantityUpdate }
+              />
+            ) }
           />
           <Route
             path="/products/:id"
-            component={ MoreDetails }
+            render={ (props) => (
+              <MoreDetails
+                { ...props }
+                quantity={ quantity }
+                quantityUpdate={ this.quantityUpdate }
+              />
+            ) }
           />
           <Route
             path="/checkout"

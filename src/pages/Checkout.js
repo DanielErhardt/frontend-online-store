@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import CheckoutCard from '../components/CheckoutCard';
 import getProducts from '../helpers/getProducts';
 
@@ -60,6 +61,7 @@ export default class Checkout extends Component {
 
     return (
       <section>
+        <Link to="/">Voltar</Link>
         <div>
           <h3>Revise seus Produtos</h3>
           {uniqueItems.map((item) => (
@@ -151,7 +153,6 @@ export default class Checkout extends Component {
             required
           />
           <input
-            // data-testid="product-detail-evaluation"
             type="text"
             placeholder="Cidade"
             name="cidade"
