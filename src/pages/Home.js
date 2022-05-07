@@ -51,8 +51,8 @@ export default class Home extends React.Component {
 
   render() {
     const { categoriasLista, products, queryResult } = this.state;
-    const { quantityUpdate } = this.props;
-    // console.log(quantityUpdate);
+    const { quantityUpdate, quantity } = this.props;
+    console.log(quantity);
     return (
       <section>
         <Link to="/">Voltar</Link>
@@ -78,7 +78,7 @@ export default class Home extends React.Component {
             Pesquisar
           </button>
         </form>
-        <CartButton />
+        <CartButton quantity={ quantity } />
         <div>
           {products.map((item) => (
             <CardsProducts
