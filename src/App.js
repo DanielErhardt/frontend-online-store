@@ -21,12 +21,9 @@ export default class App extends React.Component {
 
   quantityUpdate = () => {
     let quantity = 0;
-    let index = 0;
     const cartItems = getProducts() || [];
-    while (index < cartItems.length) {
-      quantity += 1;
-      index += 1;
-    }
+    quantity = cartItems.length;
+
     this.setState({
       quantity,
     });
@@ -34,6 +31,7 @@ export default class App extends React.Component {
 
   render() {
     const { quantity } = this.state;
+    // console.log(quantity);
     return (
       <BrowserRouter>
         <Switch>
@@ -55,7 +53,6 @@ export default class App extends React.Component {
             render={ (props) => (
               <Cart
                 { ...props }
-                quantity={ quantity }
                 quantityUpdate={ this.quantityUpdate }
               />
             ) }
