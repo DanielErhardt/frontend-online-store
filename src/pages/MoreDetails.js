@@ -25,11 +25,11 @@ export default class MoreDetails extends React.Component {
 
   render() {
     const { produto } = this.state;
-    const { quantityUpdate } = this.props;
+    const { quantityUpdate, quantity } = this.props;
     return (
       <section>
         <Link to="/">Voltar</Link>
-        <CartButton />
+        <CartButton quantity={ quantity } />
         <div data-testid="product-detail-name">
           {produto.attributes && produto.attributes.map((item) => (
             <div key={ item.id }>
@@ -54,4 +54,5 @@ export default class MoreDetails extends React.Component {
 MoreDetails.propTypes = {
   id: PropTypes.string,
   quantityUpdate: PropTypes.func,
+  quantity: PropTypes.number,
 }.isRequired;

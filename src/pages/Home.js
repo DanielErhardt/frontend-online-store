@@ -52,7 +52,7 @@ export default class Home extends React.Component {
   render() {
     const { categoriasLista, products, queryResult } = this.state;
     const { quantityUpdate, quantity } = this.props;
-    console.log(quantity);
+    // console.log(quantity);
     return (
       <section>
         <Link to="/">Voltar</Link>
